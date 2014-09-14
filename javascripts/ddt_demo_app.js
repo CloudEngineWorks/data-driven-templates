@@ -10,17 +10,25 @@ var app = angular.module('ddtApp', ['ngSanitize']);
 
 
 app.directive('drivenTemplate', function ($compile) {
-    var templates = {"section": '<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
-					"table": '<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
-					"footer": '<div class="demo-footer"><p>{{content.narrative}}</p></div>'};
+    var templates = {
+		"section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
+		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
+		"table": '<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
+		"footer": '<div class="demo-footer"><p>{{content.narrative}}</p></div>'};
 
-    var getTemplate = function(viewType) {
-        return templates[viewType];
+	// gets a templates html given a name and an edit_mode
+    var getTemplate = function(viewType, edit_mode) {
+		var postfix = (edit_mode)? "_edit": "";
+        return templates[viewType + postfix];
     };
 
     var linker = function(scope, element, attrs) {
-        element.html(getTemplate(scope.content.view_template));
-        $compile(element.contents())(scope);
+        scope.$watch("content.edit_mode", function() {
+          element.html(getTemplate(scope.content.view_template, scope.content.edit_mode));
+          $compile(element.contents())(scope);
+        });
     };
 
     return {
