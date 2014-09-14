@@ -11,7 +11,7 @@ var app = angular.module('ddtApp', ['ngSanitize']);
 
 app.directive('drivenTemplate', function ($compile) {
     var templates = {"section": '<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
-					"table": '<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
+					"table": '<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table></div>',
 					"footer": '<div class="demo-footer"><p>{{content.narrative}}</p></div>'};
 
     var getTemplate = function(viewType) {
