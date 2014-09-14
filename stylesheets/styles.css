@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  padding:50px;
+  padding:12px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#777;
   font-weight:300;
@@ -61,6 +61,7 @@ code, pre {
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   color:#333;
   font-size:12px;
+  margin: 3px;
 }
 
 pre {
@@ -93,6 +94,15 @@ th {
 
 img {
   max-width:100%;
+}
+
+textarea {
+width: 100%;
+}
+
+input.demo-h2 {
+width: 100%;
+font-size: large;
 }
 
 header {
@@ -252,4 +262,28 @@ footer {
     font-size:12pt;
     color:#444;
   }
+}
+
+div.button-bar {
+  border: solid silver 1px;
+  background-color: rgb(89, 223, 47);
+  padding: 8px;
+  margin: 2px;
+}
+
+div.demo-section {
+    border: dashed rgb(160, 176, 218) 1px;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
+}
+div.demo-footer {
+    border: dashed rgb(89, 223, 47) 1px;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
+}
+
+div.demo-table {
+    border: 1px dashed #CE2F2F;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
 }
