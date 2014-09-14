@@ -16,9 +16,9 @@ app.directive('drivenTemplate', function ($compile) {
 		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
 		"table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td></tr></tbody></table>',
+			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td></tr></tbody></table></div>',
 		"table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell.value" /></td></tr></tbody></table>',
+			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell.value" /></td></tr></tbody></table></div>',
 		"footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-footer"><p>{{content.narrative}}</p></div>',
 		"footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
