@@ -14,11 +14,11 @@ app.directive('drivenTemplate', function ($compile) {
 		"section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
 		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
+			<div class="demo-section"><input class="demo-h2" ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
 		"table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
+			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table></div>',
 		"table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell" /></td></tr></tbody></table>',
+			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell" /></td></tr></tbody></table></div>',
 		"footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-footer"><p>{{content.narrative}}</p></div>',
 		"footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\

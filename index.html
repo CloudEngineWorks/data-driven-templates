@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="ddtApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -18,18 +18,18 @@
     <script src="javascripts/ddt_demo_app.js"></script>
 
   </head>
-  <body ng-app="ddtApp">
+  <body ng-controller="demoCtrl">
 
-	<div ng-controller="demoCtrl" class="row">
-		<div class="col-md-5">
+	<div class="button-bar row">
+		<div  class="col-md-12">
+			<button ng-click="add_content()" class="btn btn-success">add content</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
 			<div data-driven-template ng-repeat="item in content.items" content="item"></div>
 		</div>
-
-		<div  class="col-md-2">
-			<button ng-click="add_content()">add content</button>
-		</div>
-			
-		<div id="json_data_view" class="col-md-5"><pre ng-bind="stringify_content()"></pre></div>
+		<div id="json_data_view" class="col-md-6"><pre ng-bind="stringify_content()"></pre></div>
 	</div>
 
   </body>
