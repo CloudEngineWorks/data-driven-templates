@@ -1,4 +1,4 @@
-// Rapid Prototype: of data-driven-templates 
+// Rapid Prototype: of data-driven-templates
 // a bit of a mess due to trying out a bunch of techniques...
 // based on http://onehungrymind.com/angularjs-dynamic-templates/
 // also see (for a good overview of angular)  http://stephanebegaudeau.tumblr.com/post/48776908163/everything-you-need-to-understand-to-start-with
@@ -11,23 +11,33 @@ var app = angular.module('ddtApp', ['ngSanitize']);
 
 app.directive('drivenTemplate', function ($compile) {
     var templates = {
-		"section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
-		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
-		"table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td></tr></tbody></table></div>',
-		"table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-table"><table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell.value" /></td></tr></tbody></table></div>',
-		"footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-footer"><p>{{content.narrative}}</p></div>',
-		"footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>',
-		};
+      "section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-section"><h2>{{content.title}}</h2>\
+          <p>{{content.narrative}}</p>\
+        </div>',
+      "section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-section"><input class="demo-h2" ng-model="content.title"/><br/>\
+          <textarea ng-model="content.narrative"></textarea>\
+        </div>',
+      "table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-table"><table><tbody>\
+          <tr ng-repeat="row in content.data" >\
+            <td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td>\
+          </tr></tbody></table></div>',
+      "table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-table"><table><tbody>\
+          <tr ng-repeat="row in content.data" >\
+            <td ng-repeat="cell in row"><input ng-model="cell.value" /></td>\
+          </tr></tbody></table></div>',
+      "footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-footer"><p>{{content.narrative}}</p></div>',
+      "footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+        <div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>'
+    };
 
-	// gets a templates html given a name and an edit_mode
+    // gets a templates html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
-		var postfix = (edit_mode)? "_edit": "";
+    var postfix = (edit_mode)? "_edit": "";
         return templates[viewType + postfix];
     };
 
@@ -52,20 +62,24 @@ app.directive('drivenTemplate', function ($compile) {
 function demoCtrl($scope, $http) {
     "use strict";
     $scope.content = {"items":[
-        {"view_template": "section", "title": "The First Program", "narrative": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh felis, condimentum sit amet laoreet luctus, posuere auctor lorem. Nullam malesuada."},
-        {"view_template": "table" , "title": "A First Table", "data": 
-			[[{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}], 
-			 [{"value":"... a.n.x "}, {"value": "... ... ..."}, {"value":"(x, x), or 2 (x)"}], 
-			 [{"value":"... (a/n).x "}, {"value":"... ... ..."}, {"value":"(÷, x)"}], 
-			 [{"value":"... a + n + x"}, {"value":"... ... ..."}, {"value":"(+, +), or 2 (+)"}]
-			]},
-        {"view_template": "section", "title": "A Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh felis, condimentum sit amet laoreet luctus, posuere auctor lorem. Nullam malesuada."},
-        {"view_template": "footer", "narrative": "Lorem ipsum footer ipsum dolor sit footer amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh"}
+      {"view_template": "section", "title": "The First Program", "narrative": "Lorem ipsum Lady Ada dolor sit amet."},
+      {"view_template": "table" , "title": "A First Table", "data":[
+        [{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}],
+        [{"value":"... a.n.x "},         {"value":"... ... ..."},   {"value":"(x, x), or 2 (x)"}],
+        [{"value":"... (a/n).x "},       {"value":"... ... ..."},            {"value":"(÷, x)"}],
+        [{"value":"... a + n + x"},      {"value":"... ... ..."},   {"value":"(+, +), or 2 (+)"}]
+      ]},
+      {"view_template": "section", "title": "A Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit"},
+      {"view_template": "footer", "narrative": "Lorem ipsum footer ipsum dolor sit footer amet, consectetur."}
     ]};
+    
     $scope.stringify_content = function () {
         return JSON.stringify($scope.content, null, ' ');
     };
+    
     $scope.add_content = function () {
-        $scope.content.items.unshift( {"view_template": "section", "title": "A New First Section", "narrative": "Lorem ipsum nan nan-nan nan-nan nahh dolor sit amet, consectetur adipiscing elit."} );
+        $scope.content.items.unshift({"view_template": "section", "title": "A New First Section",
+          "narrative": "Lorem ipsum nan nan-nan nan-nan nahh dolor sit amet, consectetur adipiscing elit."
+        });
     };
 }

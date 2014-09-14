@@ -96,6 +96,15 @@ img {
   max-width:100%;
 }
 
+textarea {
+width: 100%;
+}
+
+input.demo-h2 {
+width: 100%;
+font-size: large;
+}
+
 header {
   width:270px;
   float:left;
@@ -263,18 +272,18 @@ div.button-bar {
 }
 
 div.demo-section {
-	border: dashed rgb(160, 176, 218) 1px;
-	padding: 3px 5px 2px 5px;
-	margin: 5px 0 1px 0;
+    border: dashed rgb(160, 176, 218) 1px;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
 }
 div.demo-footer {
-	border: dashed rgb(89, 223, 47) 1px;
-	padding: 3px 5px 2px 5px;
-	margin: 5px 0 1px 0;
+    border: dashed rgb(89, 223, 47) 1px;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
 }
 
 div.demo-table {
-	border: 1px dashed #CE2F2F;
-	padding: 3px 5px 2px 5px;
-	margin: 5px 0 1px 0;
+    border: 1px dashed #CE2F2F;
+    padding: 3px 5px 2px 5px;
+    margin: 5px 0 1px 0;
 }
