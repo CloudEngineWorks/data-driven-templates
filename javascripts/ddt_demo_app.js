@@ -15,8 +15,15 @@ app.directive('drivenTemplate', function ($compile) {
 			<div class="demo-section"><h2>{{content.title}}</h2><p>{{content.narrative}}</p></div>',
 		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
-		"table": '<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
-		"footer": '<div class="demo-footer"><p>{{content.narrative}}</p></div>'};
+		"table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
+		"table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell" /></td></tr></tbody></table>',
+		"footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<div class="demo-footer"><p>{{content.narrative}}</p></div>',
+		"footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
+			<div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>',
+		};
 
 	// gets a templates html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
