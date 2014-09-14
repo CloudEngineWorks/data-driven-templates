@@ -1,4 +1,4 @@
-	Who : Nate Morse  (will migrate to the highest level language that still Turing complete)
+	Who : am I?  Nate Morse  (will migrate to the highest level language that still Turing complete)
 
 demo1 : is a directive that "changes" its template according to the data 
 

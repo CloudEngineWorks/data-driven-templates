@@ -16,9 +16,9 @@ app.directive('drivenTemplate', function ($compile) {
 		"section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-section"><input ng-model="content.title"/><br/><textarea ng-model="content.narrative"></textarea></div>',
 		"table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell"></span></td></tr></tbody></table>',
+			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td></tr></tbody></table>',
 		"table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell" /></td></tr></tbody></table>',
+			<table><tbody><tr ng-repeat="row in content.data" ><td ng-repeat="cell in row"><input ng-model="cell.value" /></td></tr></tbody></table>',
 		"footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
 			<div class="demo-footer"><p>{{content.narrative}}</p></div>',
 		"footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
@@ -53,7 +53,11 @@ function demoCtrl($scope, $http) {
     "use strict";
     $scope.content = {"items":[
         {"view_template": "section", "title": "The First Program", "narrative": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh felis, condimentum sit amet laoreet luctus, posuere auctor lorem. Nullam malesuada."},
-        {"view_template": "table" , "title": "A First Table", "data" : [["For x<sup>an</sup>", "the operations would be", "34 (x)"], ["... a.n.x ", "... ... ...", "(x, x), or 2 (x)"], ["... (a/n).x ", "... ... ...", "(÷, x)"], ["... a + n + x", "... ... ...", "(+, +), or 2 (+)"]
+        {"view_template": "table" , "title": "A First Table", "data": 
+			[[{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}], 
+			 [{"value":"... a.n.x "}, {"value": "... ... ..."}, {"value":"(x, x), or 2 (x)"}], 
+			 [{"value":"... (a/n).x "}, {"value":"... ... ..."}, {"value":"(÷, x)"}], 
+			 [{"value":"... a + n + x"}, {"value":"... ... ..."}, {"value":"(+, +), or 2 (+)"}]
 			]},
         {"view_template": "section", "title": "A Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh felis, condimentum sit amet laoreet luctus, posuere auctor lorem. Nullam malesuada."},
         {"view_template": "footer", "narrative": "Lorem ipsum footer ipsum dolor sit footer amet, consectetur adipiscing elit. Nunc pulvinar pretium felis. Vivamus nibh"}
