@@ -10,10 +10,7 @@ var app = angular.module('ddtApp', ['ngSanitize']);
 
 
 app.directive('drivenTemplate', function ($compile, $templateCache) {
-    var templates = {
-    };
-
-    // gets a templates html given a name and an edit_mode
+    // gets html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
 		var suffix = (edit_mode)? "_edit": "";
         return $templateCache.get(viewType + suffix + ".html");
@@ -39,17 +36,11 @@ app.directive('drivenTemplate', function ($compile, $templateCache) {
 
 function demoCtrl($scope, $http) {
     "use strict";
-    $scope.content = {"items":[
-      {"view_template": "section", "title": "The First Program", "narrative": "Lorem ipsum Lady Ada dolor sit amet."},
-      {"view_template": "table" , "title": "A First Table", "data":[
-        [{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}],
-        [{"value":"... a.n.x "},         {"value":"... ... ..."},   {"value":"(x, x), or 2 (x)"}],
-        [{"value":"... (a/n).x "},       {"value":"... ... ..."},            {"value":"(÷, x)"}],
-        [{"value":"... a + n + x"},      {"value":"... ... ..."},   {"value":"(+, +), or 2 (+)"}]
-      ]},
-      {"view_template": "section", "title": "A Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit"},
-      {"view_template": "footer", "narrative": "Lorem ipsum footer ipsum dolor sit footer amet, consectetur."}
-    ]};
+    
+    $http.get('data_feed.json').success(function(data) {
+		$scope.content = data;
+	});
+
     
     $scope.stringify_content = function () {
         return JSON.stringify($scope.content, null, ' ');
