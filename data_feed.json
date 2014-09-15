@@ -1,0 +1,23 @@
+{"items":[
+  {"view_template": "footer", "narrative": "Footer at the top! Lorem ipsum footer ipsum dolor sit footer amet, consectetur."},
+  {"view_template": "section", "title": "A Section", "narrative": "Lorem ipsum dolor sit"},
+  {"view_template": "nested", "title": "The First (nested) Program", "narrative": "Lorem ipsum Lady Ada dolor sit amet.",
+	"items":[
+	  {"view_template": "section", "title": "The Nested Program", "narrative": "Lorem ipsum nested Lady Ada dolor sit amet."},
+	  {"view_template": "table" , "title": "A Nested Table", "data":[
+		[{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}],
+		[{"value":"... a.n.x "},         {"value":"... ... ..."},   {"value":"(x, x), or 2 (x)"}],
+		[{"value":"... (a/n).x "},       {"value":"... ... ..."},            {"value":"(÷, x)"}],
+		[{"value":"... a + n + x"},      {"value":"... ... ..."},   {"value":"(+, +), or 2 (+)"}]
+	  ]},
+	  {"view_template": "section", "title": "Nested Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit"},
+	  {"view_template": "footer", "narrative": "Nested Lorem ipsum footer Nested ipsum dolor sit footer amet, consectetur."}
+	]
+  },
+  {"view_template": "table" , "title": "A First Table", "data":[
+	[{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}],
+	[{"value":"... a.n.x "},         {"value":"... ... ..."},   {"value":"(x, x), or 2 (x)"}],
+	[{"value":"... (a/n).x "},       {"value":"... ... ..."},            {"value":"(÷, x)"}],
+	[{"value":"... a + n + x"},      {"value":"... ... ..."},   {"value":"(+, +), or 2 (+)"}]
+  ]}
+]}
