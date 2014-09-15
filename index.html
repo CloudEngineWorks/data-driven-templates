@@ -12,7 +12,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
+
     <script src="javascripts/libs/angularjs/1.2.24/angular.min.js"></script>
     <script src="javascripts/libs/angularjs/1.2.24/angular-sanitize.js"></script>
     <script src="javascripts/ddt_demo_app.js"></script>
@@ -21,7 +21,7 @@
   <body ng-controller="demoCtrl">
 
     <div class="button-bar row">
-        <div  class="col-md-12"><em> Demo_3 </em> 
+        <div  class="col-md-12"><em> Demo_3 </em>
             <button ng-click="add_content()" class="btn btn-success">add content</button>
         </div>
     </div>
@@ -33,6 +33,47 @@
             <pre ng-bind="stringify_content()"></pre>
         </div>
     </div>
+
+    <!-- templates for use with ddt -->
+    <script type="text/ng-template" id="section.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-section">
+            <h2>{{content.title}}</h2>
+            <p>{{content.narrative}}</p>
+        </div>
+    </script>    
+    <script type="text/ng-template" id="section_edit.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-section">
+            <input class="demo-h2" ng-model="content.title"/><br/>
+            <textarea ng-model="content.narrative"></textarea>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="table.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-table"><table><tbody>
+          <tr ng-repeat="row in content.data" >
+            <td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td>
+          </tr>
+        </tbody></table></div>
+    </script>    
+    <script type="text/ng-template" id="table_edit.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-table"><table><tbody>
+          <tr ng-repeat="row in content.data" >
+            <td ng-repeat="cell in row"><input ng-model="cell.value" /></td>
+          </tr></tbody></table></div>
+    </script>
+
+    <script type="text/ng-template" id="footer.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-footer"><p>{{content.narrative}}</p></div>
+    </script>    
+    <script type="text/ng-template" id="footer_edit.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>
+    </script>
 
   </body>
 </html>

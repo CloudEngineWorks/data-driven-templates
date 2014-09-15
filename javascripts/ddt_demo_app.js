@@ -9,36 +9,14 @@
 var app = angular.module('ddtApp', ['ngSanitize']);
 
 
-app.directive('drivenTemplate', function ($compile) {
+app.directive('drivenTemplate', function ($compile, $templateCache) {
     var templates = {
-      "section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-section"><h2>{{content.title}}</h2>\
-          <p>{{content.narrative}}</p>\
-        </div>',
-      "section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-section"><input class="demo-h2" ng-model="content.title"/><br/>\
-          <textarea ng-model="content.narrative"></textarea>\
-        </div>',
-      "table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-table"><table><tbody>\
-          <tr ng-repeat="row in content.data" >\
-            <td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td>\
-          </tr></tbody></table></div>',
-      "table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-table"><table><tbody>\
-          <tr ng-repeat="row in content.data" >\
-            <td ng-repeat="cell in row"><input ng-model="cell.value" /></td>\
-          </tr></tbody></table></div>',
-      "footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-footer"><p>{{content.narrative}}</p></div>',
-      "footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>'
     };
 
     // gets a templates html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
-    var postfix = (edit_mode)? "_edit": "";
-        return templates[viewType + postfix];
+		var suffix = (edit_mode)? "_edit": "";
+        return $templateCache.get(viewType + suffix + ".html");
     };
 
     var linker = function(scope, element, attrs) {
