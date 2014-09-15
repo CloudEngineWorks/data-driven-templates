@@ -75,5 +75,22 @@
         <div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>
     </script>
 
+    <script type="text/ng-template" id="nested.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-section">
+            <h2>{{content.title}}</h2>
+            <p>{{content.narrative}}</p>
+            <div data-driven-template content="item" ng-repeat="item in content.items"></div>
+        </div>
+    </script>    
+    <script type="text/ng-template" id="nested_edit.html">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />
+        <div class="demo-section">
+            <input class="demo-h2" ng-model="content.title"/><br/>
+            <textarea ng-model="content.narrative"></textarea>
+            <div data-driven-template content="item" ng-repeat="item in content.items"></div>
+        </div>
+    </script>
+    
   </body>
 </html>

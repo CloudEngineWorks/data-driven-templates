@@ -41,7 +41,6 @@ function demoCtrl($scope, $http) {
 		$scope.content = data;
 	});
 
-    
     $scope.stringify_content = function () {
         return JSON.stringify($scope.content, null, ' ');
     };
