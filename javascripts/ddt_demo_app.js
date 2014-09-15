@@ -8,37 +8,38 @@
 
 var app = angular.module('ddtApp', ['ngSanitize']);
 
+// sortable directive uses JQueryUI to manage the sorting by drag&drop
+app.directive('sortable', function() {
+    return {
+        // A = attribute, E = Element, C = Class and M = HTML Comment
+        restrict:'A',
+        link: function(scope, element, attrs) {
+			var start;
+			var dragStart = function(e, ui) {
+				start = ui.item.index();
+			};
+			var dragEnd = function(e, ui) {
+				var end = ui.item.index();
+				scope.content.items.splice(end, 0, 
+				   scope.content.items.splice(start, 1)[0]);
 
-app.directive('drivenTemplate', function ($compile) {
-    var templates = {
-      "section": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-section"><h2>{{content.title}}</h2>\
-          <p>{{content.narrative}}</p>\
-        </div>',
-      "section_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-section"><input class="demo-h2" ng-model="content.title"/><br/>\
-          <textarea ng-model="content.narrative"></textarea>\
-        </div>',
-      "table": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-table"><table><tbody>\
-          <tr ng-repeat="row in content.data" >\
-            <td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td>\
-          </tr></tbody></table></div>',
-      "table_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-table"><table><tbody>\
-          <tr ng-repeat="row in content.data" >\
-            <td ng-repeat="cell in row"><input ng-model="cell.value" /></td>\
-          </tr></tbody></table></div>',
-      "footer": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-footer"><p>{{content.narrative}}</p></div>',
-      "footer_edit": 'edit: <input type="checkbox" ng-model="content.edit_mode" />\
-        <div class="demo-footer"><textarea ng-model="content.narrative"></textarea></div>'
+				scope.$apply();
+			};
+			$(element).sortable({
+				start: dragStart,
+				update: dragEnd
+			});
+			$(element).disableSelection();
+        }
     };
+});
 
-    // gets a templates html given a name and an edit_mode
+// data driven templates with two way data binding...
+app.directive('drivenTemplate', function ($compile, $templateCache) {
+    // gets html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
-    var postfix = (edit_mode)? "_edit": "";
-        return templates[viewType + postfix];
+		var suffix = (edit_mode)? "_edit": "";
+        return $templateCache.get(viewType + suffix + ".html");
     };
 
     var linker = function(scope, element, attrs) {
@@ -61,18 +62,11 @@ app.directive('drivenTemplate', function ($compile) {
 
 function demoCtrl($scope, $http) {
     "use strict";
-    $scope.content = {"items":[
-      {"view_template": "section", "title": "The First Program", "narrative": "Lorem ipsum Lady Ada dolor sit amet."},
-      {"view_template": "table" , "title": "A First Table", "data":[
-        [{"value":"For x<sup>an</sup>"}, {"value":"the operations would be"}, {"value":"34 (x)"}],
-        [{"value":"... a.n.x "},         {"value":"... ... ..."},   {"value":"(x, x), or 2 (x)"}],
-        [{"value":"... (a/n).x "},       {"value":"... ... ..."},            {"value":"(÷, x)"}],
-        [{"value":"... a + n + x"},      {"value":"... ... ..."},   {"value":"(+, +), or 2 (+)"}]
-      ]},
-      {"view_template": "section", "title": "A Second Section", "narrative": "Lorem ipsum blah blah blah dolor sit"},
-      {"view_template": "footer", "narrative": "Lorem ipsum footer ipsum dolor sit footer amet, consectetur."}
-    ]};
     
+    $http.get('data_feed.json').success(function(data) {
+		$scope.content = data;
+	});
+
     $scope.stringify_content = function () {
         return JSON.stringify($scope.content, null, ' ');
     };
@@ -83,3 +77,5 @@ function demoCtrl($scope, $http) {
         });
     };
 }
+
+

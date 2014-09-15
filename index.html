@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>data-driven-templates for angularjs</title>
 
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="stylesheets/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -12,7 +13,10 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>    
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
     <script src="javascripts/libs/angularjs/1.2.24/angular.min.js"></script>
     <script src="javascripts/libs/angularjs/1.2.24/angular-sanitize.js"></script>
     <script src="javascripts/ddt_demo_app.js"></script>
@@ -21,12 +25,12 @@
   <body ng-controller="demoCtrl">
 
     <div class="button-bar row">
-        <div  class="col-md-12"><em> Demo_3 </em> 
+        <div  class="col-md-12"><em> Demo_5 </em>
             <button ng-click="add_content()" class="btn btn-success">add content</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div sortable class="col-md-6">
             <div data-driven-template content="item" ng-repeat="item in content.items"></div>
         </div>
         <div id="json_data_view" class="col-md-6">
@@ -34,5 +38,69 @@
         </div>
     </div>
 
+    <!-- templates for use with ddt -->
+    <script type="text/ng-template" id="section.html">
+        <div class="demo-section">
+            edit: <input type="checkbox" ng-model="content.edit_mode" />
+            <h2>{{content.title}}</h2>
+            <p>{{content.narrative}}</p>
+        </div>
+    </script>    
+    <script type="text/ng-template" id="section_edit.html">
+        <div class="demo-section">
+            edit: <input type="checkbox" ng-model="content.edit_mode" />
+            <input class="demo-h2" ng-model="content.title"/><br/>
+            <textarea ng-model="content.narrative"></textarea>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="table.html">
+        <div class="demo-table"><table><tbody>
+          edit: <input type="checkbox" ng-model="content.edit_mode" />
+          <tr ng-repeat="row in content.data" >
+            <td ng-repeat="cell in row"><span ng-bind-html="cell.value"></span></td>
+          </tr>
+        </tbody></table></div>
+    </script>    
+    <script type="text/ng-template" id="table_edit.html">
+        <div class="demo-table"><table><tbody>
+          edit: <input type="checkbox" ng-model="content.edit_mode" />
+          <tr ng-repeat="row in content.data" >
+            <td ng-repeat="cell in row"><input ng-model="cell.value" /></td>
+          </tr></tbody></table></div>
+    </script>
+
+    <script type="text/ng-template" id="footer.html">
+        <div class="demo-footer">
+            edit: <input type="checkbox" ng-model="content.edit_mode" />
+            <p>{{content.narrative}}</p></div>
+    </script>    
+    <script type="text/ng-template" id="footer_edit.html">
+        <div class="demo-footer">
+        edit: <input type="checkbox" ng-model="content.edit_mode" />        
+        <textarea ng-model="content.narrative"></textarea></div>
+    </script>
+
+    <script type="text/ng-template" id="nested.html">
+        <div class="demo-section">
+            edit: <input type="checkbox" ng-model="content.edit_mode" />
+            <h2>{{content.title}}</h2>
+            <p>{{content.narrative}}</p>
+            <div sortable >
+              <div data-driven-template content="item" ng-repeat="item in content.items"></div>
+            </div>
+        </div>
+    </script>    
+    <script type="text/ng-template" id="nested_edit.html">
+        <div class="demo-section">
+            edit: <input type="checkbox" ng-model="content.edit_mode" />
+            <input class="demo-h2" ng-model="content.title"/><br/>
+            <textarea ng-model="content.narrative"></textarea>
+            <div sortable >
+              <div data-driven-template content="item" ng-repeat="item in content.items"></div>
+            </div>
+        </div>
+    </script>
+    
   </body>
 </html>
