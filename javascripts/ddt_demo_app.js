@@ -8,7 +8,33 @@
 
 var app = angular.module('ddtApp', ['ngSanitize']);
 
+// sortable directive uses JQueryUI to manage the sorting by drag&drop
+app.directive('sortable', function() {
+    return {
+        // A = attribute, E = Element, C = Class and M = HTML Comment
+        restrict:'A',
+        link: function(scope, element, attrs) {
+			var start;
+			var dragStart = function(e, ui) {
+				start = ui.item.index();
+			};
+			var dragEnd = function(e, ui) {
+				var end = ui.item.index();
+				scope.content.items.splice(end, 0, 
+				   scope.content.items.splice(start, 1)[0]);
 
+				scope.$apply();
+			};
+			$(element).sortable({
+				start: dragStart,
+				update: dragEnd
+			});
+			$(element).disableSelection();
+        }
+    };
+});
+
+// data driven templates with two way data binding...
 app.directive('drivenTemplate', function ($compile, $templateCache) {
     // gets html given a name and an edit_mode
     var getTemplate = function(viewType, edit_mode) {
@@ -51,3 +77,5 @@ function demoCtrl($scope, $http) {
         });
     };
 }
+
+
