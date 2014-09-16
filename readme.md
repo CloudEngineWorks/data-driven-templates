@@ -4,7 +4,7 @@ demo1 : is a directive that "changes" its template according to the data
 
 	When: at load time (only).
 	
-demo2 : adds the ability to change the template when a watched variable changes.
+**demo2 : adds the ability to change the template when a watched variable changes.**[http://nmorse.github.io/data-driven-templates/demo_2.html]
 
 	Why: wont it change the model (for some types)?
 	
