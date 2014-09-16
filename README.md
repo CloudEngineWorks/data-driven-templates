@@ -1,16 +1,21 @@
 data-driven-templates
 =====================
+http://nmorse.github.io/data-driven-templates.
 
-Demonstration of Data Driven Templates (DDT) in AngularJS
+A Demonstration of Data Driven Templates (DDT) in AngularJS
 
-Play its game... (Angular's conventions)
-Angular is only JS
-  Question for you: Javascript and you are [enimes, friends, loyal combatants, in love]? 
+Introduction to Angular
+-----------------------
+
+Play its game... (Angular's framework conventions are trying to be helpful)
+  Angular is 100% JavaScript, so you must work with JS.
+    Are you Javascript's [friend, loyal combatant, enimy]? 
 
   How do you work?
-     in my opinion the world went down the wrong track when dashes were welcomed into css
-  ``` class="my-cool-style"``` when it could have been ```class="my_cool_style" ```
-  but if you play its game **Angular lets Designers and Developers work well together.**
+     there is a conflict between Designers and Developers:
+  Designers use-this-form  ``` <div my-cool-attr>``` But Developers cannot use dashes in variables...
+  so Angular changes is to ``` var myCoolAttr; ```.
+  **Angular lets Designers and Developers work well together.**
   
 
   DRYest framework ever!
