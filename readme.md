@@ -1,5 +1,6 @@
 
-demo1 : shows a directive that "changes" its template according to the content data 
+**demo1 : shows a directive that "changes" its template according to the content data **
+[http://nmorse.github.io/data-driven-templates/demo_1.html]
 
 	When: at load time (only).
 	
