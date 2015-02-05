@@ -1,4 +1,4 @@
 ddt
 ===
 
-reqursive data renderers in angularjs 
+recursive data renderers in angularjs 
