@@ -10,19 +10,17 @@ var app = angular.module('ddtApp', ['ngSanitize']);
 
 // sortable directive uses JQueryUI to manage the sorting by drag&drop
 app.directive('sortable', function() {
-    return {
-        // A = attribute, E = Element, C = Class and M = HTML Comment
-        restrict:'A',
-        link: function(scope, element, attrs) {
+  return {
+    // A = attribute, E = Element, C = Class and M = HTML Comment
+    restrict:'A',
+    link: function(scope, element, attrs) {
 			var start;
 			var dragStart = function(e, ui) {
 				start = ui.item.index();
 			};
 			var dragEnd = function(e, ui) {
 				var end = ui.item.index();
-				scope.content.items.splice(end, 0, 
-				   scope.content.items.splice(start, 1)[0]);
-
+				scope.content.items.splice(end, 0, scope.content.items.splice(start, 1)[0]);
 				scope.$apply();
 			};
 			$(element).sortable({
@@ -30,52 +28,50 @@ app.directive('sortable', function() {
 				update: dragEnd
 			});
 			$(element).disableSelection();
-        }
-    };
+    }
+  };
 });
 
 // data driven templates with two way data binding...
 app.directive('drivenTemplate', function ($compile, $templateCache) {
-    // gets html given a name and an edit_mode
-    var getTemplate = function(viewType, edit_mode) {
-		var suffix = (edit_mode)? "_edit": "";
-        return $templateCache.get(viewType + suffix + ".html");
-    };
+  // gets html given a name and an edit_mode
+  var getTemplate = function(viewType, edit_mode) {
+	var suffix = (edit_mode)? "_edit": "";
+    return $templateCache.get(viewType + suffix + ".html");
+  };
 
-    var linker = function(scope, element, attrs) {
-        scope.$watch("content.edit_mode", function() {
-          element.html(getTemplate(scope.content.view_template, scope.content.edit_mode));
-          $compile(element.contents())(scope);
-        });
-    };
+  var linker = function(scope, element, attrs) {
+    scope.$watch("content.edit_mode", function() {
+      element.html(getTemplate(scope.content.view_template, scope.content.edit_mode));
+      $compile(element.contents())(scope);
+    });
+  };
 
-    return {
-        restrict: "A",
-        replace: true,
-        link: linker,
-        scope: {
-            content:'=content'
-        }
-    };
+  return {
+    restrict: "A",
+    replace: true,
+    link: linker,
+    scope: {
+        content:'=content'
+    }
+  };
 });
 
 
-function demoCtrl($scope, $http) {
-    "use strict";
-    
-    $http.get('data_feed.json').success(function(data) {
+function demoCtrl($scope, $http) { "use strict";
+  $http.get('data_feed.json').success(function(data) {
 		$scope.content = data;
 	});
 
-    $scope.stringify_content = function () {
-        return JSON.stringify($scope.content, null, ' ');
-    };
-    
-    $scope.add_content = function () {
-        $scope.content.items.unshift({"view_template": "section", "title": "A New First Section",
-          "narrative": "Lorem ipsum nan nan-nan nan-nan nahh dolor sit amet, consectetur adipiscing elit."
-        });
-    };
+  $scope.stringify_content = function () {
+    return JSON.stringify($scope.content, null, ' ');
+  };
+  
+  $scope.add_content = function () {
+    $scope.content.items.unshift({"view_template": "section", "title": "A New First Section",
+      "narrative": "Lorem ipsum nan nan-nan nan-nan nahh dolor sit amet, consectetur adipiscing elit."
+    });
+  };
 }
 
 
