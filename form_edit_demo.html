@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fruit Basket Editor Example, AngularJS ddt</title>
+  </head>
+  <body ng-controller="demoCtrl">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Fruit Basket Editor</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <textarea ng-bind="content"></textarea>
+    </div>
+    <div class="col-md-9">
+      <div ddt-editor="basket"></div>
+    </div>
+  </div>
+  </body>
+</html>
