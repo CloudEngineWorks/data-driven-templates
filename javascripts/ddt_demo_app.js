@@ -32,7 +32,7 @@ app.directive('sortable', function() {
   };
 });
 
-// data driven templates with two way data binding...
+// data driven templates with two way data binding while being se recursivly...
 app.directive('drivenTemplate', function ($compile, $templateCache) {
   // gets html given a name and an edit_mode
   var getTemplate = function(viewType, edit_mode) {
