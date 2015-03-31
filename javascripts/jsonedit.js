@@ -56,6 +56,9 @@ app.directive('drivenTemplate', function ($compile, $templateCache) {
       element.html(getTemplate(t, scope.edit_mode));
       $compile(element.contents())(scope);
     });
+    scope.$watch("content", function() {
+      $compile(element.contents())(scope);
+    });
   };
 
   return {
